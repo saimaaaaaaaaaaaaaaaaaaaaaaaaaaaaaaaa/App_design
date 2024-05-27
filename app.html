@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriConnect BD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul li a.active {
+            font-weight: bold;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AgriConnect BD</h1>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#" id="addCropLink">Add Crop</a></li>
+                <li><a href="#" id="searchLink">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="addCropSection" class="hidden">
+            <h2>Add Crop</h2>
+            <form id="addCropForm">
+                <label for="cropName">Crop Name:</label>
+                <input type="text" id="cropName" required>
+                <label for="plantingTime">Planting Time:</label>
+                <input type="text" id="plantingTime" required>
+                <label for="fertilizer">Recommended Fertilizer:</label>
+                <input type="text" id="fertilizer" required>
+                <label for="pestManagement">Pest Management:</label>
+                <input type="text" id="pestManagement" required>
+                <label for="harvesting">Harvesting:</label>
+                <input type="text" id="harvesting" required>
+                <button type="submit">Add Crop</button>
+            </form>
+        </section>
+
+        <section id="searchSection" class="hidden">
+            <h2>Search</h2>
+            <input type="text" id="searchInput" placeholder="Search by Crop Name">
+            <button id="searchButton">Search</button>
+        </section>
+
+        <section id="cropInfoSection" class="hidden">
+            <h2>Crop Information</h2>
+            <div id="cropInfo"></div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addCropSection = document.getElementById('addCropSection');
+            const searchSection = document.getElementById('searchSection');
+            const cropInfoSection = document.getElementById('cropInfoSection');
+            const addCropForm = document.getElementById('addCropForm');
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const cropInfo = document.getElementById('cropInfo');
+
+            addCropForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const cropName = document.getElementById('cropName').value;
+                const plantingTime = document.getElementById('plantingTime').value;
+                const fertilizer = document.getElementById('fertilizer').value;
+                const pestManagement = document.getElementById('pestManagement').value;
+                const harvesting = document.getElementById('harvesting').value;
+                // Here you can implement code to add the crop to the database
+                // For demonstration purposes, let's just display the input values
+                cropInfo.innerHTML = `<p>Crop Name: ${cropName}</p>
+                                      <p>Planting Time: ${plantingTime}</p>
+                                      <p>Recommended Fertilizer: ${fertilizer}</p>
+                                      <p>Pest Management: ${pestManagement}</p>
+                                      <p>Harvesting: ${harvesting}</p>`;
+                cropInfoSection.classList.remove('hidden');
+            });
+
+            searchButton.addEventListener('click', function() {
+                const searchTerm = searchInput.value;
+                // Here you can implement code to search for the crop in the database
+                // For demonstration purposes, let's just display the search term
+                cropInfo.innerHTML = `<p>Search Term: ${searchTerm}</p>`;
+                cropInfoSection.classList.remove('hidden');
+            });
+
+            // Toggle sections based on navigation links
+            document.getElementById('addCropLink').addEventListener('click', function(event) {
+                event.preventDefault();
+                addCropSection.classList.remove('hidden');
+                searchSection.classList.add('hidden');
+                cropInfoSection.classList.add('hidden');
+            });
+
+            document.getElementById('searchLink').addEventListener('click', function(event) {
+                event.preventDefault();
+                searchSection.classList.remove('hidden');
+                addCropSection.classList.add('hidden');
+                cropInfoSection.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
